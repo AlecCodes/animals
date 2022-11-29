@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <body>
+        <%- include("../partials/header.ejs") %>
+        <table>
+            <tr>
+                <th>Animal:</th>
+                <td><%=animal.name%></td>
+            </tr>
+            <tr>
+                <th>Color:</th>
+                <td><%=animal.color%> </td>
+            </tr>
+            <tr>
+                <th>Scary?:</th>
+                <td><%=animal.isScary%> </td>
+            </tr>
+            <tr>
+                <th>Life Expectancy:</th>
+                <td><%=animal.lifeExpectancy%> </td>
+            </tr>
+        </table>
+        <a href="/animals/<%=index%>/edit "><button>EDIT</button></a>
+        <form action="/animals/<%=index%>?_method=DELETE" method="POST">
+            <input type="submit" value="Delete">
+        </form>
+        <a href="/animals"><button>BACK</button></a>
+    </body>
+</html>

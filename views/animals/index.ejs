@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+    <body>
+        <%- include("../partials/header.ejs") %>
+
+        <h1> WELCOM TO INDEXX</h1>
+        <ul id = "index">
+            <% for (let i = 0; i < animals.length; i ++) { %>
+                <a href = "/animals/<%=animals[i]._id%>"><li><%= animals[i].name %></li></a>
+            <% } %>  
+        </ul>
+        <a href="/animals/new"><button>NEW</button></a>
+    </body>
+</html>
