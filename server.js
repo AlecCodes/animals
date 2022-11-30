@@ -4,7 +4,7 @@ const morgan = require('morgan')
 const methodOverride = require('method-override')
 const PORT = process.env.PORT
 const mongoose = require("mongoose")
-
+//const userRouter = require("./controllers/user")
 
 const app = express()
 
