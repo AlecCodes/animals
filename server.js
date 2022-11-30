@@ -94,6 +94,8 @@ app.delete("/animals/:id",(req,res)=>{
 
 //UPDATE ROUTE
 app.put("/animals/:id",(req,res)=>{
+    console.log(`UPDATE ROUTE: THE ID IS ${req.params.id}`)
+    req.body.isScary = req.body.isScary === 'on' ? true : false
     Animal.findByIdAndUpdate(req.params.id, req.body, {new:true},(error,updatedAnimal)=>{
         res.redirect(`/animals/${req.params.id}`)
     })
@@ -112,6 +114,7 @@ app.post("/animals",(req,res)=>{
 app.get("/animals/:id/edit",(req,res)=>{
     Animal.findById((req.params.id),(err, foundAnimal)=>{
         res.render('animals/edit.ejs',{foundAnimal})
+        console.log(`EDIT ROUTE Current Animal id is: ${req.params.id}`)
     })
 })
 
