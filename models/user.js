@@ -1,6 +1,6 @@
-const mongoose = require("./connection")
+const mongoose = require("mongoose")
 
-const {schema, model} = mongoose;
+const {Schema, model} = mongoose;
 
 const userSchema = new Schema({
     username:{type: String, required: true, unique: true},

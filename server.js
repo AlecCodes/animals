@@ -4,7 +4,7 @@ const morgan = require('morgan')
 const methodOverride = require('method-override')
 const PORT = process.env.PORT
 const mongoose = require("mongoose")
-//const userRouter = require("./controllers/user")
+const userRouter = require("./controllers/user")
 
 const app = express()
 
@@ -16,6 +16,7 @@ app.use(express.urlencoded({extended:false}))
 app.use(morgan("tiny"))
 app.use(methodOverride("_method"))
 app.use("/static",express.static("public"))
+app.use('/user',userRouter)
 
 /////////////////////////////
 //DATABASE CONNECTION
