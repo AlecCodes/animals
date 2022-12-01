@@ -50,7 +50,6 @@ const animalSchema = new Schema({
 
 const Animal = model("animal",animalSchema)
 
-
 //////////////////////////////
 //ROUTES
 //////////////////////////////
