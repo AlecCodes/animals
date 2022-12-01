@@ -11,9 +11,6 @@ const router = express.Router()
 //ROUTES
 //////////////////////////////
 
-////////////////////////////
-//Routes
-////////////////////////////
 
 router.get("/signup",(req,res)=>{
     res.render("user/signup.ejs")

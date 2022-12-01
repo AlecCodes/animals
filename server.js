@@ -37,20 +37,6 @@ mongoose.connection
     .on("close", ()=> console.log("disconnected?!!"))
     .on("error",(error)=> console.log(error))
 
-//////////////////////////////
-//ANIMAL MODEL
-//////////////////////////////
-const {Schema, model} = mongoose
-
-const animalSchema = new Schema({
-    name: String,
-    color: String,
-    isScary: Boolean,
-    lifeExpectancy: Number
-})
-
-const Animal = model("animal",animalSchema)
-
 
 //LISTENER
 app.listen(PORT, ()=> console.log(`ANIMAL WORLD listening at ${PORT}`))
