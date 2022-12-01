@@ -2,7 +2,6 @@
 <html lang="en">
     <body>
         <%- include("../partials/header.ejs") %>
-        <h1><%= foundAnimal._id %> </h1>
         <form action="/animals/<%=foundAnimal._id%>?_method=PUT" method="POST">
             <input type="text" name="name" placeholder="name" value="<%=foundAnimal.name%>">
             <input type="number" name="lifeExpectancy" placeholder="Life Expectancy" value="<%=foundAnimal.lifeExpectancy%>">
