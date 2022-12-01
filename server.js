@@ -7,7 +7,8 @@ const mongoose = require("mongoose")
 const userRouter = require("./controllers/user")
 const animalRouter = require("./controllers/animal")
 const app = express()
-
+const session = require('express-session')
+const MongoStore = require("connect-mongo")
 
 /////////////////////////////
 // Middleware
@@ -16,27 +17,19 @@ app.use(express.urlencoded({extended:false}))
 app.use(morgan("tiny"))
 app.use(methodOverride("_method"))
 app.use("/static",express.static("public"))
-app.use('/user',userRouter)
-app.use(animalRouter)
+app.use(session({
+    secret: process.env.SECRET,
+    store: MongoStore.create({mongoUrl: process.env.DATABASE_URL}),
+    saveUninitialized: true,
+    resave: false,
+  }))
+app.use('/user', userRouter)
+app.use('/animals', animalRouter)
 
-/////////////////////////////
-//DATABASE CONNECTION
-/////////////////////////////
-const DATABASE_URL = process.env.DATABASE_URL
-const CONFIG = {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-}
-
-//establish our connections
-mongoose.connect(DATABASE_URL, CONFIG)
-
-//log connection events from mongoose.
-mongoose.connection
-    .on("open", ()=> console.log("MONGOOSE CONNECTED"))
-    .on("close", ()=> console.log("disconnected?!!"))
-    .on("error",(error)=> console.log(error))
-
+//HOME ROUTE - for signup and login
+app.get("/",(req,res)=>{
+    res.render("index.ejs")
+})
 
 //LISTENER
 app.listen(PORT, ()=> console.log(`ANIMAL WORLD listening at ${PORT}`))

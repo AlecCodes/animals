@@ -4,16 +4,16 @@
     <%- include("../partials/header.ejs") %>
     <main>
       <div>
-        <form action="/user/signup" method="post">
+        <form action="/user/login" method="post">
           <fieldset>
-            <legend>New User</legend>
+            <legend>User Login</legend>
             <label
               >USERNAME: <input type="text" name="username" required />
             </label>
             <label
               >PASSWORD: <input type="password" name="password" required />
             </label>
-            <input type="submit" value="Create Account" />
+            <input type="submit" value="Login" />
           </fieldset>
         </form>
       </div>

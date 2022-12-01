@@ -10,20 +10,20 @@ const router = express.Router()
 //////////////////////////
 //ROUTER MIDDLEWARE This is where we check if user is logged into active session
 //////////////////////////
-// router.use((req,res,next)=>{
-//     if(req.session.loggedIn){
-//         next();
-//     } else {
-//         res.redirect("/user/login")
-//     }
-// })
+router.use((req,res,next)=>{
+    if(req.session.loggedIn){
+        next();
+    } else {
+        res.redirect("/user/login")
+    }
+})
 
 //////////////////////////////
 //ROUTES
 //////////////////////////////
 
 //SEED route - Empty and populate database w seed data
-router.get("/animals/seed",(req,res) =>{
+router.get("/seed",(req,res) =>{
     const startAnimals =[
         {name: "Elephant", color:"gray", isScary: false, lifeExpectancy: 48},
         {name: "Scorpion", color:"brown", isScary: true, lifeExpectancy: 3},
@@ -37,7 +37,7 @@ router.get("/animals/seed",(req,res) =>{
 })
 
 //Index route 
-router.get("/animals/",(req,res)=>{
+router.get("/",(req,res)=>{
     //Get all animals from Mongo
     Animal.find({})
     .then((animals)=>{
@@ -46,14 +46,14 @@ router.get("/animals/",(req,res)=>{
 })
 
 //NEW route
-router.get("/animals/new",(req,res)=>{
+router.get("/new",(req,res)=>{
     res.render("animals/new.ejs")
 })
 
 
 
 //DELETE Route
-router.delete("/animals/:id",(req,res)=>{
+router.delete("/:id",(req,res)=>{
     Animal.findByIdAndDelete(req.params.id,(err,deletedAnimal)=>{
         console.log(err, deletedAnimal)
         res.redirect('/animals')
@@ -61,7 +61,7 @@ router.delete("/animals/:id",(req,res)=>{
 })
 
 //UPDATE ROUTE
-router.put("/animals/:id",(req,res)=>{
+router.put("/:id",(req,res)=>{
     console.log(`UPDATE ROUTE: THE ID IS ${req.params.id}`)
     req.body.isScary = req.body.isScary === 'on' ? true : false
     Animal.findByIdAndUpdate(req.params.id, req.body, {new:true},(error,updatedAnimal)=>{
@@ -70,7 +70,7 @@ router.put("/animals/:id",(req,res)=>{
 })
 
 //CREATE route
-router.post("/animals",(req,res)=>{
+router.post("/",(req,res)=>{
     req.body.isScary = req.body.isScary === 'on' ? true : false
     Animal.create(req.body, (err, createdAnimal) =>{
         res.redirect("/animals")
@@ -79,7 +79,7 @@ router.post("/animals",(req,res)=>{
 })
 
 //EDIT route
-router.get("/animals/:id/edit",(req,res)=>{
+router.get("/:id/edit",(req,res)=>{
     Animal.findById((req.params.id),(err, foundAnimal)=>{
         res.render('animals/edit.ejs',{foundAnimal})
         console.log(`EDIT ROUTE Current Animal id is: ${req.params.id}`)
@@ -88,7 +88,7 @@ router.get("/animals/:id/edit",(req,res)=>{
 
 
 //SHOW Route
-router.get("/animals/:index",(req,res)=>{
+router.get("/:index",(req,res)=>{
     Animal.findById(req.params.index)
     .then((animal)=>{
         res.render('animals/show.ejs',{
