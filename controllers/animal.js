@@ -1,5 +1,5 @@
 const express = require('express')
-const Animal = require('../models/Animal')
+const Animal = require('../models/animal')
 
 //////////////////////////
 //CREATE ROUTER
